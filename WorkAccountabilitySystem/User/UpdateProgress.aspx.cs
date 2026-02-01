@@ -14,6 +14,12 @@ namespace WorkAccountabilitySystem.User
             if (!IsPostBack)
             {
                 LoadWork();
+
+                // ADDED: auto-select work if workId is passed from Dashboard
+                if (Request.QueryString["workId"] != null) // ADDED
+                {
+                    ddlWork.SelectedValue = Request.QueryString["workId"]; // ADDED
+                }
             }
         }
 
@@ -57,6 +63,9 @@ namespace WorkAccountabilitySystem.User
 
                 cmd.ExecuteNonQuery();
             }
+
+            // ADDED: redirect to dashboard so status is reloaded and reflected
+            Response.Redirect("~/Dashboard.aspx"); // ADDED
         }
     }
 }

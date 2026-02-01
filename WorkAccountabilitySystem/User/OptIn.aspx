@@ -15,6 +15,10 @@
 <asp:TextBox ID="txtWorkId" runat="server" />
 
 <br /><br />
+    <!-- ADDED: message label for feedback -->
+<asp:Label ID="lblMsg" runat="server" ForeColor="Red" /> <!-- ADDED -->
+
+<br /><br />
 
 <asp:Button ID="btnOptIn" runat="server"
     Text="Opt In"

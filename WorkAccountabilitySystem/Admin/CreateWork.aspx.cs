@@ -14,7 +14,15 @@ namespace WorkAccountabilitySystem.Admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            // ADDED: Enforce Admin-only access at server level
+            Auth.RequireRole("Admin"); // ADDED
 
+            // OPTIONAL HARDENING (kept minimal)
+            // Prevent User from submitting form via direct POST
+            if (!IsPostBack && Session["UserId"] == null) // ADDED
+            {
+                Response.Redirect("~/Login.aspx"); // ADDED
+            }
         }
         protected void Create_Click(object sender, EventArgs e)
         {

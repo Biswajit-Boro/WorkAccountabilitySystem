@@ -9,6 +9,8 @@ namespace WorkAccountabilitySystem
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            pnlAdmin.Visible = IsAdmin();
+
             if (!IsPostBack)
                 LoadActive();
         }
@@ -78,6 +80,12 @@ namespace WorkAccountabilitySystem
         {
             return Session["Role"] != null &&
                    Session["Role"].ToString() == "User";
+        }
+        protected void Logout_Click(object sender, EventArgs e)
+        {
+            Session.Clear();      // ADDED: remove all session keys
+            Session.Abandon();   // ADDED: terminate session
+            Response.Redirect("/Login.aspx"); // ADDED: redirect to login
         }
 
     }

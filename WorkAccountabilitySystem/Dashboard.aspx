@@ -8,12 +8,13 @@
 <body>
 <form id="form1" runat="server">
 
+
 <h2>Work Dashboard</h2>
 
-
-<asp:Panel ID="pnlAdmin" runat="server" Visible="false">
+<asp:Panel ID="pnlAdmin" runat="server">
     <a href="/Admin/CreateWork.aspx">[ Create Work ]</a>
 </asp:Panel>
+
 
 <br />
 
@@ -25,7 +26,6 @@
         <asp:BoundField DataField="Status" HeaderText="Status" />
         <asp:BoundField DataField="Users" HeaderText="Users" />
 
-       
         <asp:TemplateField HeaderText="User Action">
             <ItemTemplate>
                 <asp:Panel runat="server" Visible='<%# IsUser() %>'>
@@ -36,13 +36,13 @@
             </ItemTemplate>
         </asp:TemplateField>
 
-       
         <asp:TemplateField HeaderText="Admin Action">
             <ItemTemplate>
                 <asp:Panel runat="server" Visible='<%# IsAdmin() %>'>
-                    <a href='/Admin/AddRemark.aspx'>[ Respond ]</a>
+                  
+                    <a href='/Admin/AddRemark.aspx?workId=<%# Eval("WorkId") %>'>[ Respond ]</a>
                     |
-                    <a href='/Admin/AdminActions.aspx'>[ Force Close / Reopen ]</a>
+                    <a href='/Admin/AdminActions.aspx?workId=<%# Eval("WorkId") %>'>[ Force Close / Reopen ]</a>
                 </asp:Panel>
             </ItemTemplate>
         </asp:TemplateField>
@@ -53,8 +53,12 @@
             DataNavigateUrlFormatString="History.aspx?workId={0}" />
     </Columns>
 </asp:GridView>
+    <asp:Button 
+    ID="btnLogout" 
+    runat="server" 
+    Text="Logout" 
+    OnClick="Logout_Click" />  
 
 </form>
 </body>
 </html>
-

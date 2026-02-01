@@ -22,6 +22,24 @@ namespace WorkAccountabilitySystem.User
             {
                 c.Open();
 
+                // ADDED: check if user already opted in for this work
+                SqlCommand checkCmd = new SqlCommand(@"
+                    SELECT COUNT(*)
+                    FROM WorkOptIn
+                    WHERE WorkId = @w AND UserId = @u", c); // ADDED
+
+                checkCmd.Parameters.AddWithValue("@w", txtWorkId.Text); // ADDED
+                checkCmd.Parameters.AddWithValue("@u", Session["UserId"]); // ADDED
+
+                int alreadyOpted = (int)checkCmd.ExecuteScalar(); // ADDED
+
+                if (alreadyOpted > 0) // ADDED
+                {
+                    lblMsg.Text = "You have already opted in to this work."; // ADDED
+                    return; // ADDED: stop duplicate insert
+                }
+
+                // EXISTING INSERT LOGIC (unchanged)
                 SqlCommand cmd = new SqlCommand(@"
                     INSERT INTO WorkOptIn (WorkId, UserId)
                     VALUES (@w, @u)", c);
