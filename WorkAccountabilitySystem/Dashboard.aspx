@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Dashboard.aspx.cs" Inherits="WorkAccountabilitySystem.Dashboard" %>
 
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
@@ -8,13 +9,26 @@
 <body>
 <form id="form1" runat="server">
 
+<!-- ADDED: top bar for global actions -->
+<div style="display:flex; justify-content:space-between; align-items:center">
+    <h2>Work Dashboard</h2>
 
-<h2>Work Dashboard</h2>
+    <!-- ADDED: global history + logout (for both roles) -->
+    <div>
+        <a href="/AllHistory.aspx">[ All History ]</a> <!-- ADDED -->
+        &nbsp;|&nbsp;
+        <asp:Button 
+            ID="btnLogout" 
+            runat="server" 
+            Text="Logout" 
+            OnClick="Logout_Click" />
+    </div>
+</div>
 
+<!-- EXISTING: Admin-only create work -->
 <asp:Panel ID="pnlAdmin" runat="server">
     <a href="/Admin/CreateWork.aspx">[ Create Work ]</a>
 </asp:Panel>
-
 
 <br />
 
@@ -39,10 +53,7 @@
         <asp:TemplateField HeaderText="Admin Action">
             <ItemTemplate>
                 <asp:Panel runat="server" Visible='<%# IsAdmin() %>'>
-                  
-                    <a href='/Admin/AddRemark.aspx?workId=<%# Eval("WorkId") %>'>[ Respond ]</a>
-                    |
-                    <a href='/Admin/AdminActions.aspx?workId=<%# Eval("WorkId") %>'>[ Force Close / Reopen ]</a>
+                    <a href='/Admin/AddRemark.aspx?workId=<%# Eval("WorkId") %>'>[ Respond ]</a>                  
                 </asp:Panel>
             </ItemTemplate>
         </asp:TemplateField>
@@ -53,11 +64,6 @@
             DataNavigateUrlFormatString="History.aspx?workId={0}" />
     </Columns>
 </asp:GridView>
-    <asp:Button 
-    ID="btnLogout" 
-    runat="server" 
-    Text="Logout" 
-    OnClick="Logout_Click" />  
 
 </form>
 </body>

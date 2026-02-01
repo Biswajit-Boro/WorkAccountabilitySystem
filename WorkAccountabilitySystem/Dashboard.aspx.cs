@@ -48,11 +48,23 @@ namespace WorkAccountabilitySystem
 
                 FROM WorkItems w
                 WHERE w.IsDeleted = 0
+
+                -- ADDED: hide work whose latest status is Closed (Option A)
+                AND ISNULL((
+                    SELECT TOP 1 p.Status
+                    FROM ProgressUpdates p
+                    WHERE p.WorkId = w.WorkId
+                    ORDER BY p.CreatedDate DESC
+                ), 'Open') <> 'Closed'
+
+                -- EXISTING LOGIC: admin force-closed work must also be hidden
                 AND NOT EXISTS (
-                    SELECT 1 FROM AdminActions a
+                    SELECT 1
+                    FROM AdminActions a
                     WHERE a.WorkId = w.WorkId
                     AND a.ActionType = 'ForceClosed'
                 )
+
                 ORDER BY
                     CASE w.Priority
                         WHEN 'High' THEN 1
@@ -70,6 +82,7 @@ namespace WorkAccountabilitySystem
                 gvActive.DataBind();
             }
         }
+
         protected bool IsAdmin()
         {
             return Session["Role"] != null &&
@@ -81,12 +94,12 @@ namespace WorkAccountabilitySystem
             return Session["Role"] != null &&
                    Session["Role"].ToString() == "User";
         }
+
         protected void Logout_Click(object sender, EventArgs e)
         {
-            Session.Clear();      // ADDED: remove all session keys
-            Session.Abandon();   // ADDED: terminate session
-            Response.Redirect("/Login.aspx"); // ADDED: redirect to login
+            Session.Clear();      // remove all session keys
+            Session.Abandon();   // terminate session
+            Response.Redirect("/Login.aspx"); // redirect to login
         }
-
     }
 }

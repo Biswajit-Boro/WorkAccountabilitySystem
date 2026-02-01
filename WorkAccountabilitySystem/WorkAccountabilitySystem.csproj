@@ -67,6 +67,7 @@
     <Content Include="Admin\AddRemark.aspx" />
     <Content Include="Admin\AdminActions.aspx" />
     <Content Include="Admin\CreateWork.aspx" />
+    <Content Include="AllHistory.aspx" />
     <Content Include="Dashboard.aspx" />
     <Content Include="History.aspx" />
     <Content Include="Login.aspx" />
@@ -95,6 +96,13 @@
     </Compile>
     <Compile Include="Admin\CreateWork.aspx.designer.cs">
       <DependentUpon>CreateWork.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AllHistory.aspx.cs">
+      <DependentUpon>AllHistory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AllHistory.aspx.designer.cs">
+      <DependentUpon>AllHistory.aspx</DependentUpon>
     </Compile>
     <Compile Include="Dashboard.aspx.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>

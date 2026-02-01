@@ -11,7 +11,7 @@ namespace WorkAccountabilitySystem
 {
 
 
-    public partial class Dashboard
+    public partial class AllHistory
     {
 
         /// <summary>
@@ -24,30 +24,57 @@ namespace WorkAccountabilitySystem
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// btnLogout control.
+        /// lnkTimeline control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnLogout;
+        protected global::System.Web.UI.WebControls.LinkButton lnkTimeline;
 
         /// <summary>
-        /// pnlAdmin control.
+        /// lnkWorkWise control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlAdmin;
+        protected global::System.Web.UI.WebControls.LinkButton lnkWorkWise;
 
         /// <summary>
-        /// gvActive control.
+        /// pnlTimeline control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvActive;
+        protected global::System.Web.UI.WebControls.Panel pnlTimeline;
+
+        /// <summary>
+        /// rptAllHistory control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptAllHistory;
+
+        /// <summary>
+        /// pnlWorkWise control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlWorkWise;
+
+        /// <summary>
+        /// rptWorkWise control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptWorkWise;
     }
 }
